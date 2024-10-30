@@ -136,8 +136,9 @@ void cadastrarLeitor(InfoLeitor *leitores) {
 
         totalLeitores++; // Incrementa o contador de leitores
 
-    // Salvar leitores após o cadastro
-    salvarLeitores();
+    salvarLeitores(); // Salvar leitores após o cadastro
+
+    printf("Cadastro efetuado com sucesso!"); //Mensagem de cadastro efetuado
 
     totalLeitores++; // Incrementa o contador de leitores
 }
@@ -152,7 +153,25 @@ void carregarLeitores() {
         fclose(file);
         printf("Dados carregados com sucesso!\n");
     } else {
-        printf("Nenhum dado anterior encontrado.\n");
+        printf("Nenhum dado encontrado.\n");
+    }
+}
+
+void validarId(int *id, char *mensagem) {
+    int resultado;
+
+    while (1) {
+        // Loop até que uma entrada válida seja recebida
+        printf("\n%s", mensagem);
+
+        resultado = scanf("%d", id); // Verifica se é número inteiro
+
+        if (resultado == 1 && *id > 0) {
+            break; // Caso seja inteiro positivo, encerra o loop
+        } else {
+            printf("Entrada inválida! Por favor, digite um número inteiro.\n");
+            while (getchar() != '\n'); // Limpa até encontrar a quebra linha
+        }
     }
 }
 
@@ -172,84 +191,106 @@ void emprestarLivro() {
      getchar(); // Limpa o buffer
 
         if (opcao == 1) {
-            printf("Digite o nome completo do leitor: ");
-            fgets(buscaLeitor, sizeof(buscaLeitor), stdin);
-            buscaLeitor[strcspn(buscaLeitor, "\n")] = 0; // Remove a quebra de linha que pode ser capturada pelo fgets
+            if (file != NULL) {
+                printf("Digite o nome completo do leitor: ");
+                fgets(buscaLeitor, sizeof(buscaLeitor), stdin);
+                buscaLeitor[strcspn(buscaLeitor, "\n")] = 0; // Remove a quebra de linha que pode ser capturada pelo fgets
 
-            int leitorEncontrado = 0; // Para verificar se o leitor foi encontrado
+                int leitorEncontrado = 0; // Para verificar se o leitor foi encontrado
 
-            for(int i = 0; i < totalLeitores; i++) {
-                if (strcasecmp(buscaLeitor, leitores[i].nomeLeitor) == 0) {
-                    printf("Dados encontrados!");
-                    snprintf(dadosLeitor, sizeof(dadosLeitor), "Nome: %s\nContato: %s\n", leitores[i].nomeLeitor, leitores[i].contato);
-                    leitorEncontrado = 1;
-                    break;
+                for(int i = 0; i < totalLeitores; i++) {
+                    if (strcasecmp(buscaLeitor, leitores[i].nomeLeitor) == 0) {
+                        printf("Dados encontrados!\n");
+                        snprintf(dadosLeitor, sizeof(dadosLeitor), "Nome: %s\nContato: %s\n", leitores[i].nomeLeitor, leitores[i].contato);
+                        leitorEncontrado = 1;
+                        break;
+                    }
                 }
-            }
-            if (!leitorEncontrado) {
-                printf("Leitor não encontrado!\n");
+                if (!leitorEncontrado) {
+                    printf("Leitor não encontrado!\n");
+                }
+            } else {
+                printf("Erro: Nenhum arquivo disponível para buscar leitores.\n");
             }
         }else if (opcao == 2) {
             cadastrarLeitor();
+            snprintf(dadosLeitor, sizeof(dadosLeitor), "Nome: %s\nContato: %s\n", leitores[totalLeitores - 1].nomeLeitor, leitores[totalLeitores - 1].numeroLeitorFormatado);
         } else {
-            printf("Opcao invalida!\n");
+            printf("Opcao invalida! Digite apenas uma das opções.\n");
         }
     } while(opcao != 1 && opcao != 2);
 
-    int id;
-    printf("Digite o ID do livro que deseja emprestar: ");
-    scanf("%d", &id);
-    getchar(); // Limpa o buffer
 
-    for (int i = 0; i < totalLivros; i++) {
-        if (livros[i].id == id && livros[i].disponivel) {
-            livros[i].disponivel = 0;
-            cadastrarLeitor(&leitores);
-            char numeroLeitorFormatado[MAX_NUMEROFORMATADO];
-            printf("\nLivro %s emprestado com sucesso!\n", livros[i]);
-            printf("Nome do leitor: %s\n", leitores->nomeLeitor[totalLeitores - 1]);
-            printf("Numero para contato: %s\n", leitores->numeroLeitorFormatado);
-            return;
+    int id;
+    char mensagem[] = "Digite o ID do livro que deseja emprestar: ";
+
+    validarId(&id, mensagem); // Função que valida se o ID é número inteiro
+
+        for (int i = 0; i < totalLivros; i++) {
+            if (livros[i].id == id && livros[i].disponivel) {
+                livros[i].disponivel = 0;
+                printf("\nLivro %s emprestado com sucesso!\n", livros[i].titulo);
+                printf("%s\n", dadosLeitor);
+                return;
+            }
         }
-    }
 
     printf("Livro nao encontrado ou ja esta emprestado.\n");
 }
 
 void devolverLivro() {
     int id;
-    printf("Digite o ID do livro que deseja devolver: ");
-    scanf("%d", &id);
-    getchar(); // Limpa o buffer
+    char mensagem[] = "Digite o ID do livro que deseja devolver: ";
 
-    for (int i = 0; i < totalLivros; i++) {
-        if (livros[i].id == id && !livros[i].disponivel) {
-            livros[i].disponivel = 1;
-            printf("Livro %s devolvido com sucesso!\n", livros[i]);
-            return;
-        }
-    }
+    validarId(&id, mensagem); // Função que valida se o ID é número inteiro
+
+            for (int i = 0; i < totalLivros; i++) {
+                if (livros[i].id == id && !livros[i].disponivel) {
+                    livros[i].disponivel = 1;
+                    printf("Livro %s devolvido com sucesso!\n", livros[i]);
+                    return;
+                }
+            }
 
     printf("Livro nao encontrado ou ja está disponivel.\n");
 }
 
 void removerLivro() {
+    int escolha;
     int id;
-    printf("Digite o ID do livro que deseja remover: ");
-    scanf("%d", &id);
-    getchar(); // Limpa o buffer
+    char mensagem[] = "Digite o ID do livro que deseja remover: ";
+
+    int livroEncontrado = 0; // Flag para verificar se o livro foi encontrado
+
+    validarId(&id, mensagem); // Função que valida se o ID é número inteiro
 
     for (int i = 0; i < totalLivros; i++) {
         if (livros[i].id == id) {
-            for (int j = i; j < totalLivros - 1; j++) {
-                livros[j] = livros[j + 1];
-                livros[j].id = j + 1; // Atualiza o ID para manter a sequência
-            }
-            totalLivros--;
-            printf("Livro %s removido com sucesso!\n", livros[i]);
-            return;
-        }
-    }
+            livroEncontrado = 1;
+            printf("\nLivro %s | Autor: %s \n", livros[i].titulo, livros[i].autor);
+            do {
+                printf("Confirmar exclusão: \n1- SIM \n2- NÃO\n");
+                scanf("%d", &escolha);
+                getchar(); // Limpa o buffer
 
-    printf("Livro nao encontrado.\n");
+                if (escolha == 1) {
+                    for (int j = i; j < totalLivros - 1; j++) {
+                        livros[j] = livros[j + 1];
+                        livros[j].id = j + 1; // Atualiza o ID para manter a sequência
+                    }
+                    totalLivros--;
+                    printf("Livro removido com sucesso!\n");
+                    return; // Sai da função após remoção
+                } else if (escolha == 2) {
+                    printf("Exclusão cancelada !\n");
+                    return; // Sai da função após cancelar
+                } else {
+                    printf("Opção inválida! Digite apenas 1 ou 2.\n");
+                }
+            } while (1);
+        }
+      }
+    if (!livroEncontrado) {
+        printf("Livro não encontrado.\n");
+    }
 }
