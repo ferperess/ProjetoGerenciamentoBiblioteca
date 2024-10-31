@@ -12,6 +12,7 @@
 // Estrutura de dados para os livros
 typedef struct {
     int id;
+    int anoPublicacao;
     char titulo[100];
     char autor[100];
     int disponivel; // 1 se disponível, 0 se emprestado

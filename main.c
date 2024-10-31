@@ -11,12 +11,13 @@ void exibirMenu() {
     printf("5. Emprestar livro\n");
     printf("6. Devolver livro\n");
     printf("7. Remover livro\n");
-    printf("8. Salvar e sair\n");
+    printf("8. Sair\n");
 }
 
 int main() {
 
     carregarLivros(); // Carrega os dados de livros salvos anteriormente
+    carregarLeitores(); // Carrega os dados de leitores salvos anteriormente
 
     int escolha;
     while (1) {
@@ -48,9 +49,11 @@ int main() {
                 removerLivro();
             break;
             case 8:
-                salvarLivros(); // Salva os livros cadastrados e encerra o sistema
-            printf("\nSaindo do sistema...\n");
-            exit(0);
+                salvarLivros(); // Salva os livros cadastrados antes de encerrar o sistema
+                salvarLeitores(); //Salva os leitores cadastrados antes de encerrar o sistema
+                printf("\nDados salvos.\n");
+                printf("\nSaindo do sistema...\n");
+                exit(0);
             default:
                 printf("\nOpção inválida. Tente novamente.\n");
         }
