@@ -66,7 +66,7 @@ int main() {
                 printf("\nSaindo do sistema...\n");
                 exit(0);
             default:
-                printf("\nOpção inválida. Tente novamente.\n");
+                printf("\nOpcao invalida. Tente novamente.\n");
         }
     }
 

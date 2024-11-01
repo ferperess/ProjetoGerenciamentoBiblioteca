@@ -55,8 +55,14 @@ build CMakeFiles/Projeto.dir/main.c.obj: C_COMPILER__Projeto_unscanned_Debug C$:
   OBJECT_DIR = CMakeFiles\Projeto.dir
   OBJECT_FILE_DIR = CMakeFiles\Projeto.dir
 
-build CMakeFiles/Projeto.dir/biblioteca.c.obj: C_COMPILER__Projeto_unscanned_Debug C$:/Users/fepec/OneDrive/Documentos/Faculdade/2º$ Semestre/Programação/Projeto/biblioteca.c || cmake_object_order_depends_target_Projeto
-  DEP_FILE = CMakeFiles\Projeto.dir\biblioteca.c.obj.d
+build CMakeFiles/Projeto.dir/bibliotecaLivros.c.obj: C_COMPILER__Projeto_unscanned_Debug C$:/Users/fepec/OneDrive/Documentos/Faculdade/2º$ Semestre/Programação/Projeto/bibliotecaLivros.c || cmake_object_order_depends_target_Projeto
+  DEP_FILE = CMakeFiles\Projeto.dir\bibliotecaLivros.c.obj.d
+  FLAGS = -g -std=gnu11 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\Projeto.dir
+  OBJECT_FILE_DIR = CMakeFiles\Projeto.dir
+
+build CMakeFiles/Projeto.dir/bibliotecaLeitores.c.obj: C_COMPILER__Projeto_unscanned_Debug C$:/Users/fepec/OneDrive/Documentos/Faculdade/2º$ Semestre/Programação/Projeto/bibliotecaLeitores.c || cmake_object_order_depends_target_Projeto
+  DEP_FILE = CMakeFiles\Projeto.dir\bibliotecaLeitores.c.obj.d
   FLAGS = -g -std=gnu11 -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles\Projeto.dir
   OBJECT_FILE_DIR = CMakeFiles\Projeto.dir
@@ -69,7 +75,7 @@ build CMakeFiles/Projeto.dir/biblioteca.c.obj: C_COMPILER__Projeto_unscanned_Deb
 #############################################
 # Link the executable Projeto.exe
 
-build Projeto.exe: C_EXECUTABLE_LINKER__Projeto_Debug CMakeFiles/Projeto.dir/main.c.obj CMakeFiles/Projeto.dir/biblioteca.c.obj
+build Projeto.exe: C_EXECUTABLE_LINKER__Projeto_Debug CMakeFiles/Projeto.dir/main.c.obj CMakeFiles/Projeto.dir/bibliotecaLivros.c.obj CMakeFiles/Projeto.dir/bibliotecaLeitores.c.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\Projeto.dir
