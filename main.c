@@ -2,8 +2,10 @@
 #include <stdlib.h>
 #include "biblioteca.h"
 
+extern InfoLeitor leitores[MAX_LEITORES];
+
 void exibirMenu() {
-    printf("\n--- Sistema de Biblioteca ---\n\n");
+    printf("\n--- Gerenciamento de Biblioteca ---\n\n");
     printf("1. Cadastrar leitor\n");
     printf("2. Adicionar livro\n");
     printf("3. Listar livros\n");
@@ -28,7 +30,7 @@ int main() {
 
         switch (escolha) {
             case 1:
-                cadastrarLeitor();
+                cadastrarLeitor(leitores);
             break;
             case 2:
                 adicionarLivro();

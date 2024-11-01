@@ -262,6 +262,7 @@ void devolverLivro() {
 
 void removerLivro() {
     int escolha;
+    int livroEncontrado = 0; // Verifica se o livro foi encontrado
     char busca[MAX_NOME];
 
     printf("Digite o autor ou titulo do livro que deseja devolver: ");
@@ -271,6 +272,7 @@ void removerLivro() {
     for (int i = 0; i < totalLivros; i++) {
         if ((strcmp(busca, livros[i].titulo) == 0) || (strcmp(busca, livros[i].autor) == 0)) {
             printf("\nLivro %s | Autor: %s | Ano de Publicação: %d\n", livros[i].titulo, livros[i].autor, livros[i].anoPublicacao);
+            livroEncontrado = 1;
             do {
                 printf("Confirmar exclusão: \n1- SIM \n2- NÃO\n");
                 scanf("%d", &escolha);
