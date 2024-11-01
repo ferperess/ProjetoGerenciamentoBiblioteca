@@ -64,6 +64,11 @@ int validarNomeLeitor(const char *nomeLeitor) {
 
 void cadastrarLeitor(InfoLeitor *leitores) {
 
+    if (totalLeitores >= MAX_LEITORES) {
+        printf("Limite de leitores atingido. Nao e possivel cadastrar mais leitores.\n");
+        return;
+    }
+
     // Loop para garantir que o usuário não insira números ou deixe espaços vazios
     do {
         printf("Digite o nome do leitor: ");
