@@ -51,7 +51,7 @@ void adicionarLivro() {
 
     int anoValido = 0;
     while (!anoValido) {
-        printf("Digite o ano de publicação do livro (4 dígitos): ");
+        printf("Digite o ano de publicacao do livro (4 dígitos): ");
         int confirmacao = scanf("%d", &novoLivro.anoPublicacao);
         getchar(); // Limpa o buffer
 
@@ -59,7 +59,7 @@ void adicionarLivro() {
         if (confirmacao == 1 && novoLivro.anoPublicacao >= 1000 && novoLivro.anoPublicacao <= 9999) {
             anoValido = 1; // Ano válido
         } else {
-            printf("O ano de publicação deve possuir 4 números inteiros!\n");
+            printf("O ano de publicacao deve possuir 4 numeros inteiros!\n");
         }
     }
 
@@ -70,19 +70,53 @@ void adicionarLivro() {
     printf("Livro adicionado com sucesso!\n");
 }
 
+void cabecalhoTabelaLivros() {
+    printf(BLUE "+-----+--------------------------------+-------------------------+-------------------+------------+\n" RESET);
+    printf("| ID  | Titulo                         | Autor                   | Ano de Publicacao | Disponivel  |\n");
+    printf(BLUE "+-----+--------------------------------+-------------------------+-------------------+------------+\n" RESET);
+}
+
+void cabecalhoTabelaLeitores() {
+    printf(BLUE "+-----------------------------+-------------------------+\n" RESET);
+    printf("| Nome                           | Telefone                | \n");
+    printf(BLUE "+-------------------------------+-------------------------+\n" RESET);
+}
+
+void exibirLivro(Livro livro) {
+    printf("| %-3d | %-30s | %-23s | %-17d | %-10s |\n",
+           livro.id, livro.titulo, livro.autor,
+           livro.anoPublicacao, livro.disponivel ? "Sim" : "Nao");
+    printf(BLUE "+-----+--------------------------------+-------------------------+-------------------+------------+\n" RESET);
+}
+
+void exibirLeitores(const char* nome, const char* telefone) {
+    printf("| %-30s | %-23s |\n", nome, telefone);
+    printf(BLUE "+-------------------------------+-------------------------+\n" RESET);
+}
+
 void listarLivros() {
     if (totalLivros == 0) {
         printf("Nenhum livro cadastrado.\n");
         return;
     }
-
     printf("Lista de livros:\n");
+    cabecalhoTabelaLivros();
     for (int i = 0; i < totalLivros; i++) {
-        printf("ID: %d | Titulo: %s | Autor: %s | Ano de Publicação: %d | Disponivel: %s\n",
-               livros[i].id, livros[i].titulo, livros[i].autor, livros[i].anoPublicacao,
-               livros[i].disponivel ? "Sim" : "Nao");
+        exibirLivro(livros[i]);
     }
 }
+
+void listarLeitores() {
+    if (totalLeitores == 0) {
+        printf(RED "Nenhum leitor cadastrado.\n" RESET);
+        return;
+    }
+    cabecalhoTabelaLeitores();
+    for (int i = 0; i < totalLeitores; i++) {
+        exibirLeitores(leitores[i].nomeLeitor, leitores[i].numeroLeitorFormatado);
+    }
+}
+
 
 void buscarLivro() {
     char tituloBusca[MAX_NOME];
@@ -91,10 +125,8 @@ void buscarLivro() {
     strtok(tituloBusca, "\n"); // Remove a nova linha, se existir
 
     for (int i = 0; i < totalLivros; i++) {
-        if (strcmp(livros[i].titulo, tituloBusca) == 0) {
-            printf("Livro encontrado: ID: %d | Autor: %s | Ano de Publicação: %d | Disponivel: %s\n",
-                   livros[i].id, livros[i].autor, livros[i].anoPublicacao,
-                   livros[i].disponivel ? "Sim" : "Nao");
+        if (strcasecmp(livros[i].titulo, tituloBusca) == 0) {
+            exibirLivro(livros[i]);
             return;
         }
     }
@@ -180,8 +212,8 @@ void emprestarLivro() {
 
 
     do {
-     printf("Leitor possui cadastro? \n1- SIM \n2- NÃO");
-     printf("Digite sua opção: ");
+     printf("Leitor possui cadastro? \n1- SIM \n2- NAO");
+     printf("Digite sua opcao: ");
      scanf("%d", &opcao);
      getchar(); // Limpa o buffer
 
@@ -212,7 +244,7 @@ void emprestarLivro() {
             cadastrarLeitor(leitores);
             snprintf(dadosLeitor, sizeof(dadosLeitor), "Nome: %s\nContato: %s\n", leitores[totalLeitores - 1].nomeLeitor, leitores[totalLeitores - 1].numeroLeitorFormatado);
         } else {
-            printf("Opcao invalida! Digite apenas uma das opções.\n");
+            printf("Opcao invalida! Digite apenas uma das opcoes.\n");
         }
     } while(opcao != 1 && opcao != 2);
 
@@ -224,14 +256,12 @@ void emprestarLivro() {
     strtok(busca, "\n"); // Remove a nova linha, se existir
 
     for (int i = 0; i < totalLivros; i++) {
-        if ((strcmp(busca, livros[i].titulo) == 0) || (strcmp(busca, livros[i].autor) == 0)) {
+        if ((strcasecmp(busca, livros[i].titulo) == 0) || (strcasecmp(busca, livros[i].autor) == 0)) {
             if (livros[i].disponivel) {
-                printf("Livro encontrado: ID: %d | Autor: %s | Ano de Publicação: %d | Disponivel: %s\n",
-                       livros[i].id, livros[i].autor, livros[i].anoPublicacao,
-                       livros[i].disponivel ? "Sim" : "Nao");
+                exibirLivro(livros[i]);
                        livros[i].disponivel = 0; // Marca o livro como indisponível agora
             } else {
-                printf("Livro já está emprestado");
+                printf("Livro ja esta emprestado");
             }
         }
     } printf("Livro nao encontrado.\n");
@@ -245,7 +275,7 @@ void devolverLivro() {
     strtok(busca, "\n"); // Remove a nova linha, se existir
 
             for (int i = 0; i < totalLivros; i++) {
-                if ((strcmp(busca, livros[i].titulo) == 0) || (strcmp(busca, livros[i].autor) == 0)) {
+                if ((strcasecmp(busca, livros[i].titulo) == 0) || (strcasecmp(busca, livros[i].autor) == 0)) {
                     if (!livros[i].disponivel) {
                         livros[i].disponivel = 1;
                         printf("Livro %s devolvido com sucesso!\n", livros[i].titulo);
@@ -265,16 +295,17 @@ void removerLivro() {
     int livroEncontrado = 0; // Verifica se o livro foi encontrado
     char busca[MAX_NOME];
 
-    printf("Digite o autor ou titulo do livro que deseja devolver: ");
+    printf("Digite o autor ou titulo do livro que deseja remover: ");
     fgets(busca, sizeof(busca), stdin);
     strtok(busca, "\n"); // Remove a nova linha, se existir
 
     for (int i = 0; i < totalLivros; i++) {
-        if ((strcmp(busca, livros[i].titulo) == 0) || (strcmp(busca, livros[i].autor) == 0)) {
-            printf("\nLivro %s | Autor: %s | Ano de Publicação: %d\n", livros[i].titulo, livros[i].autor, livros[i].anoPublicacao);
+        if ((strcasecmp(busca, livros[i].titulo) == 0) || (strcasecmp(busca, livros[i].autor) == 0)) {
+            printf("\nLivro %s | Autor: %s | Ano de Publicacao: %d\n", livros[i].titulo, livros[i].autor, livros[i].anoPublicacao);
             livroEncontrado = 1;
             do {
-                printf("Confirmar exclusão: \n1- SIM \n2- NÃO\n");
+                printf("Confirmar exclusao: \n1- SIM \n2- NAO\n");
+                printf("Digite sua escolha: ");
                 scanf("%d", &escolha);
                 getchar(); // Limpa o buffer
 
@@ -287,15 +318,55 @@ void removerLivro() {
                     printf("Livro removido com sucesso!\n");
                     return; // Sai da função após remoção
                 } else if (escolha == 2) {
-                    printf("Exclusão cancelada !\n");
+                    printf("Exclusao cancelada !\n");
                     return; // Sai da função após cancelar
                 } else {
-                    printf("Opção inválida! Digite apenas 1 ou 2.\n");
+                    printf("Opcao invalida! Digite apenas 1 ou 2.\n");
                 }
             } while (1);
         }
       }
     if (!livroEncontrado) {
-        printf("Livro não encontrado.\n");
+        printf("Livro nao encontrado.\n");
+    }
+}
+
+void removerLeitor() {
+    int escolha;
+    int leitorEncontrado = 0; // Verifica se o leitor foi encontrado
+    char busca[MAX_NOME];
+
+    printf("Digite o nome completo do leitor que deseja remover: ");
+    fgets(busca, sizeof(busca), stdin);
+    strtok(busca, "\n"); // Remove a nova linha, se existir
+
+    for (int i = 0; i < totalLeitores; i++) {
+        if ((strcasecmp(busca, leitores[i].nomeLeitor) == 0) {
+            printf("\nNome: %s | Telefone: %s \n", leitores[i].nomeLeitor, leitores[i].numeroLeitorFormatado);
+            leitorEncontrado = 1;
+            do {
+                printf("Confirmar exclusao: \n1- SIM \n2- NAO\n");
+                printf("Digite sua escolha: ");
+                scanf("%d", &escolha);
+                getchar(); // Limpa o buffer
+
+                if (escolha == 1) {
+                    for (int j = i; j < totalLeitores - 1; j++) {
+                        leitores[j] = leitores[j + 1];
+                    }
+                    totalLeitores--;
+                    printf("Leitor removido com sucesso!\n");
+                    return; // Sai da função após remoção
+                } else if (escolha == 2) {
+                    printf("Exclusao cancelada !\n");
+                    return; // Sai da função após cancelar
+                } else {
+                    printf("Opcao invalida! Digite apenas 1 ou 2.\n");
+                }
+            } while (1);
+        }
+    }
+    if (!leitorEncontrado) {
+        printf("Leitor nao encontrado.\n");
     }
 }
