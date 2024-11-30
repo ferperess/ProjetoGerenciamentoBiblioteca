@@ -30,11 +30,11 @@ Projeto para faculdade com os seguintes requisitos:
 
 ## Instalação
 1. Clone o repositório: https://github.com/ferperess/ProjetoGerenciamentoBiblioteca
-2. Navegue até o diretório do projeto: cd sistema-biblioteca
+2. Navegue até o diretório do projeto: cd ProjetoGerenciamentoBiblioteca
 3. Compile o projeto usando o comando: `gcc main.c bibliotecaLivros.c bibliotecaLeitores.c -o biblioteca`
 
 ## Como Executar
-No terminal ou prompt de comando, execute: './biblioteca'
+Ainda no terminal ou prompt de comando, execute: './biblioteca'
 
 ## Como Usar
 1. Execute o programa compilado
