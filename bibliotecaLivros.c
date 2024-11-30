@@ -118,7 +118,7 @@ void cadastrarLivro() {
     while (!anoValido) {
         printf("Digite o ano de publicacao do livro (4 digitos): ");
         int confirmacao = scanf("%d", &novoLivro.anoPublicacao);
-        getchar(); /** @brief Limpa o buffer */
+        while ( (getchar()) != '\n' ); /** @brief Limpa o buffer */
 
         /** @brief Verifica se o ano é um inteiro de 4 dígitos */
         if (confirmacao == 1 && novoLivro.anoPublicacao >= 1000 && novoLivro.anoPublicacao <= 9999) {
@@ -315,8 +315,7 @@ void emprestarLivro() {
     } while(opcao != 1 && opcao != 2);
 
     /** @brief Limpa completamente o buffer antes de pedir a entrada */
-    int c;
-    while ((c = getchar()) != '\n' && c != EOF);
+    while ( (getchar()) != '\n' );
 
     /** @brief Mostra os livros disponíveis */
     listarLivros();
