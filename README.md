@@ -33,6 +33,9 @@ Projeto para faculdade com os seguintes requisitos:
 2. Navegue até o diretório do projeto: cd sistema-biblioteca
 3. Compile o projeto usando o comando: `gcc main.c bibliotecaLivros.c bibliotecaLeitores.c -o biblioteca`
 
+## Como Executar
+No terminal ou prompt de comando, execute: './biblioteca'
+
 ## Como Usar
 1. Execute o programa compilado
 2. Siga as instruções no menu para navegar pelas funcionalidades
