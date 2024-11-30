@@ -202,7 +202,7 @@ void removerLeitor() {
                 printf("Confirmar exclusao: \n1- SIM \n2- NAO\n");
                 printf("Digite sua escolha: ");
                 scanf("%d", &escolha);
-                getchar(); /** @brief Limpa o buffer */
+                while ( (getchar()) != '\n' ); /** @brief Limpa o buffer */
 
                 if (escolha == 1) {
                     for (int j = i; j < totalLeitores - 1; j++) {
