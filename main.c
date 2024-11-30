@@ -42,7 +42,7 @@ int main() {
         exibirMenu();
         printf("\nDigite sua opcao:  ");
         scanf("%d", &escolha);
-        getchar(); /** @brief Limpa o buffer */
+        while ( (getchar()) != '\n' ); /** @brief Limpa o buffer */
 
         switch (escolha) {
             case 1:
