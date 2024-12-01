@@ -509,17 +509,15 @@ void devolverLivro() {
                                 scanf("%d", &quantidade);
                                 while ( (getchar()) != '\n' );
 
-                                if (quantidade > livros[i].totalExemplares) {
-                                    printf("Quantidade para remocao deve ser menor que o total de exemplares!\n");
-                                } else if (quantidade <= 0) {
-                                    printf("Quantidade para remocao deve ser maior que zero!\n");
-                                } else {
-                                    livros[i].totalExemplares = livros[i].totalExemplares - quantidade;
+                                if (quantidade > 0 && quantidade <= livros[i].totalExemplares) {
+                                    livros[i].totalExemplares -= quantidade;
                                     printf("Exemplares removidos com sucesso!\n");
                                     salvarLivros();
                                     return;
+                                } else {
+                                    printf("Quantidade invalida! Deve ser maior que 0 e menor ou igual ao total de exemplares.\n");
                                 }
-                            } while (quantidade => 0 || quantidade > livros[i].totalExemplares);
+                            } while (1);
                         } else if (escolha == 3) {
                             printf("Exclusao cancelada!\n");
                             return;
