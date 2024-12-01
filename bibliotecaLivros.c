@@ -495,7 +495,7 @@ void devolverLivro() {
                                 printf("Livro removido com sucesso!\n");
                                 salvarLivros();
                                 return;
-                            } else if (opcao == 2) {
+                            } else if (confirmacao == 2) {
                                 printf ("Exclusao cancelada!\n");
                                 return;
                             } else {
