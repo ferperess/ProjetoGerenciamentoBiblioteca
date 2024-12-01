@@ -1,3 +1,3 @@
-C:/Users/fepec/OneDrive/Documentos/Faculdade/2º Semestre/Programação/Projeto Gerenciamento Bilioteca/cmake-build-debug/CMakeFiles/Projeto.dir
-C:/Users/fepec/OneDrive/Documentos/Faculdade/2º Semestre/Programação/Projeto Gerenciamento Bilioteca/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/fepec/OneDrive/Documentos/Faculdade/2º Semestre/Programação/Projeto Gerenciamento Bilioteca/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+C:/Users/fepec/OneDrive/Documentos/Faculdade/2 Semestre/Programacao/Projeto Gerenciamento Bilioteca/cmake-build-debug/CMakeFiles/Projeto.dir
+C:/Users/fepec/OneDrive/Documentos/Faculdade/2 Semestre/Programacao/Projeto Gerenciamento Bilioteca/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/fepec/OneDrive/Documentos/Faculdade/2 Semestre/Programacao/Projeto Gerenciamento Bilioteca/cmake-build-debug/CMakeFiles/rebuild_cache.dir

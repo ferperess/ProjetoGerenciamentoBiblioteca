@@ -1,16 +1,13 @@
-cmake_minimum_required(VERSION 3.29)
-project(Projeto C)
+# Define a versão mínima do CMake necessária
+cmake_minimum_required(VERSION 3.10)
 
-set(CMAKE_C_STANDARD 11)
-set(CMAKE_C_STANDARD_REQUIRED ON)
-set(CMAKE_C_EXTENSIONS OFF)
+# Nome do projeto
+project(Projeto)
 
+# Adiciona os arquivos-fonte ao projeto
 add_executable(Projeto
+        bibliotecaLeitores.c
+        bibliotecaLivros.c
         main.c
         biblioteca.h
-        bibliotecaLivros.c
-        bibliotecaLeitores.c
 )
-
-# Inclui diretório para arquivos de cabeçalho
-target_include_directories(Projeto PRIVATE .)

@@ -511,6 +511,7 @@ void devolverLivro() {
 
                                 if (quantidade > 0 && quantidade <= livros[i].totalExemplares) {
                                     livros[i].totalExemplares -= quantidade;
+                                    livros[i].exemplaresDisponiveis -= quantidade;
                                     printf("Exemplares removidos com sucesso!\n");
                                     salvarLivros();
                                     return;
