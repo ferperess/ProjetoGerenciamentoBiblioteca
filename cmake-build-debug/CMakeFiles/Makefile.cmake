@@ -90,7 +90,7 @@ set(CMAKE_MAKEFILE_DEPENDS
   "C:/Program Files/JetBrains/CLion 2024.2.2/bin/cmake/win/x64/share/cmake-3.30/Modules/Platform/Windows-windres.cmake"
   "C:/Program Files/JetBrains/CLion 2024.2.2/bin/cmake/win/x64/share/cmake-3.30/Modules/Platform/Windows.cmake"
   "C:/Program Files/JetBrains/CLion 2024.2.2/bin/cmake/win/x64/share/cmake-3.30/Modules/Platform/WindowsPaths.cmake"
-  "C:/Users/fepec/OneDrive/Documentos/Projeto Gerenciamento Bilioteca/CMakeLists.txt"
+  "C:/Users/fepec/OneDrive/Documentos/Faculdade/2º Semestre/Programação/Projeto Gerenciamento Bilioteca/CMakeLists.txt"
   "CMakeFiles/3.30.5/CMakeCCompiler.cmake"
   "CMakeFiles/3.30.5/CMakeRCCompiler.cmake"
   "CMakeFiles/3.30.5/CMakeSystem.cmake"

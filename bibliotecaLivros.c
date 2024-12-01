@@ -439,10 +439,11 @@ void devolverLivro() {
                     do {
                         printf("\nO que deseja fazer?\n");
                         printf("1 - Remover apenas os exemplares disponiveis\n");
-                        printf("2 - Cancelar remocao\n");
+                        printf("2 - Escolher quantidade\n");
+                        printf("3 - Cancelar remocao\n");
                         printf("Digite sua escolha: ");
                         scanf("%d", &escolha);
-                        getchar();
+                        while ( (getchar()) != '\n' );
 
                         if (escolha == 1) {
                             livros[i].totalExemplares = livros[i].totalExemplares - livros[i].exemplaresDisponiveis;
@@ -451,6 +452,15 @@ void devolverLivro() {
                             salvarLivros();
                             return;
                         } else if (escolha == 2) {
+                            int quantidade;
+                            printf("Digite a quantidade de livros que deseja remover: ");
+                            scanf("%d", &quantidade);
+                            while ( (getchar()) != '\n' );
+                            livros[i].totalExemplares = livros[i].totalExemplares - quantidade;
+                            printf("Exemplares removidos com sucesso!\n");
+                            salvarLivros();
+                            return;
+                        }else if (escolha == 3) {
                             printf("Remocao cancelada.\n");
                             return;
                         } else {
@@ -461,25 +471,50 @@ void devolverLivro() {
 
                     /** @brief Se todos os exemplares estão disponíveis, segue com a remoção normal */
                     do {
-                        printf("\nConfirmar exclusao completa do livro: \n1- SIM \n2- NAO\n");
+                        printf("\nO que deseja fazer?\n");
+                        printf("1 - Remover todos os exemplares disponiveis\n");
+                        printf("2 - Escolher quantidade\n");
+                        printf("3 - Cancelar remocao\n");
                         printf("Digite sua escolha: ");
                         scanf("%d", &escolha);
-                        getchar();
+                        while ( (getchar()) != '\n' );
 
                         if (escolha == 1) {
-                            for (int j = i; j < totalLivros - 1; j++) {
-                                livros[j] = livros[j + 1];
-                                livros[j].id = j + 1; /** @brief Atualiza o ID para manter a sequência */
+                            int confirmacao;
+                            printf("\nConfirmar exclusao completa do livro: \n1- SIM \n2- NAO\n");
+                            printf("Digite sua escolha: ");
+                            scanf("%d", &confirmacao);
+                            while ( (getchar()) != '\n' );
+
+                            if (confirmacao == 1) {
+                                for (int j = i; j < totalLivros - 1; j++) {
+                                    livros[j] = livros[j + 1];
+                                    livros[j].id = j + 1; /** @brief Atualiza o ID para manter a sequência */
+                                }
+                                totalLivros--;
+                                printf("Livro removido com sucesso!\n");
+                                salvarLivros();
+                                return;
+                            } else if (opcao == 2) {
+                                printf ("Exclusao cancelada!\n");
+                                return;
+                            } else {
+                                printf("Opcao invalida! Digite apenas 1, 2 ou 3.\n");
                             }
-                            totalLivros--;
-                            printf("Livro removido com sucesso!\n");
+                        } else if (escolha == 2) {
+                            int quantidade;
+                            printf("Digite a quantidade de livros que deseja remover: ");
+                            scanf("%d", &quantidade);
+                            while ( (getchar()) != '\n' );
+                            livros[i].totalExemplares = livros[i].totalExemplares - quantidade;
+                            printf("Exemplares removidos com sucesso!\n");
                             salvarLivros();
                             return;
-                        } else if (escolha == 2) {
+                        } else if (escolha == 3) {
                             printf("Exclusao cancelada!\n");
                             return;
                         } else {
-                            printf("Opcao invalida! Digite apenas 1 ou 2.\n");
+                            printf("Opcao invalida! Digite apenas 1, 2 ou 3.\n");
                         }
                     } while (1);
                 }
